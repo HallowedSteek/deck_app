@@ -1,24 +1,119 @@
-body{
-    margin: 0;
-    padding: 0;
-    background-color: gray;
+@import url("https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@400;600;700&display=swap");
+
+:root {
+  --darkBlue: rgb(6, 38, 64);
+  --white: #fdfffcff;
+  --turquoise: #2ec4b6ff;
+  --red: #e71d36ff;
+  --orange: #ff9f1cff;
 }
 
-.App{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--darkBlue);
 }
 
-.deck--form{
-    display: grid;
-    grid-template-columns: 0.5fr 1fr;
-    gap: 10px;
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
 }
 
-.deck--form--submit{
-    grid-column: span 2;
+.deck--grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  list-style-type: none;
+  padding: 0;
+  gap: 10px;
+}
+
+.deck--grid--item {
+  background-color: var(--white);
+  width: 20vw;
+  line-height: 20vh;
+  text-align: center;
+  border: 2px solid black;
+  border-radius: 10px;
+
+  font-family: "Anek Devanagari", sans-serif;
+  font-weight: 600;
+  font-size: xx-large;
+
+  transition: all 0.2s ease-in-out;
+
+    box-shadow: 0px 10px 15px black;
+
+  cursor:pointer;
+}
+
+.deck--grid--item:hover {
+  scale: 1.02;
+  background-color: var(--orange);
+}
+
+.deck--form {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
+}
+
+.deck--form--submit {
+  margin-top: 20px;
+  border: 2px solid black;
+  background-color: var(--white);
+  border-radius: 10px;
+  padding: 10px 10px;
+  padding-bottom: 0px;
+  grid-column: span 2;
+  font-family: "Anek Devanagari", sans-serif;
+  font-weight: 700;
+  font-size: xx-large;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.deck--form--submit:hover {
+  scale: 1.05;
+
+  background: linear-gradient(
+      217deg,
+      var(--turquoise),
+      rgba(255, 0, 0, 0) 70.71%
+    ),
+    linear-gradient(127deg, var(--orange), rgba(0, 255, 0, 0) 70.71%),
+    linear-gradient(336deg, var(--red), rgba(0, 0, 255, 0) 70.71%);
+
+  color: var(--white);
+}
+
+.deck--form--title--input {
+  font-family: "Anek Devanagari", sans-serif;
+  font-weight: 400;
+  font-size: larger;
+  padding: 10px 10px;
+  padding-bottom: 7px;
+  text-indent: 5px;
+  border: 2px solid black;
+  border-left: none;
+  border-radius: 10px;
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+}
+
+.deck--form--title-label {
+  font-family: "Anek Devanagari", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  text-align: center;
+  padding: 10px 10px;
+  padding-bottom: 7px;
+  background-color: var(--turquoise);
+
+  border: 2px solid black;
+  border-radius: 10px;
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
 }
