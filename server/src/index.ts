@@ -13,15 +13,24 @@ const PORT: number = 5000;
 
 const app = express();
 
-
 app.use(cors());
 
 //middleware function🔽 trebuie sa fie pusa inainte de endpoint-uri. Ce face? de fiecare data cand cineva o sa faca un request catre api, mai intai o sa se apeleze functia asta
 app.use(express.json());
 
+//endpoint pt get 🔽
 
+app.get("/decks", async (req: Request, res: Response) => {
+  //cum dam fetch la deck urile din mongo?
 
-//tot post ul este un endpoint pt deck 🔽
+  const decks = await Deck.find();
+
+  //cum trimitem inapoi ce am primit
+
+  res.json(decks);
+});
+
+//un endpoint pt post deck 🔽
 app.post("/decks", async (req: Request, res: Response) => {
   const newDeck = new Deck({
     title: req.body.title,
