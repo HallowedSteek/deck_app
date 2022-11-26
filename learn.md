@@ -13,6 +13,9 @@ res.send("sodasdasmn world");
 metoda then, pentru a astepta mai intai ca conexiunea la api-ul mongodb
 sa fie efectuata dupa care sa dam listen la portul nostru
 
+
+//                 🔽 url-ul trebuie pus intr-un .env pentru a nu fii expus pe git, in .env folosim o variabila mongo_url de ex in care o sa stocam link-ul si dupa aceea o sa folosim un package numi dotenv pentru a putea folosi variabila din env in index.ts
+
 mongoose.connect('mongodb+srv://admin:frQIuGMLFFrrKJLU@mydeck.r1silpa.mongodb.net/?retryWrites=true&w=majority').then(()=>{
 console.log("listening on port 5000")
     🔽serverul o sa "asculte" la portul 5000

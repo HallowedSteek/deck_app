@@ -1,9 +1,15 @@
+import * as dotenv from 'dotenv'
+
+dotenv.config()
+
 import bodyParser from "body-parser"; //send post req
 import express, { Request, Response } from "express"; //framework for creating the routing for our app
 import mongoose from "mongoose"; //create models for our posts
 import cors from "cors"; // cross origin requests
 
+
 import Deck from "./models/Deck";
+
 
 const PORT: number = 5000;
 
@@ -23,9 +29,10 @@ app.post("/decks", async (req: Request, res: Response) => {
 
 mongoose
   .connect(
-    "mongodb+srv://admin:frQIuGMLFFrrKJLU@mydeck.r1silpa.mongodb.net/?retryWrites=true&w=majority"
+    process.env.MONGO_URL!
   )
   .then(() => {
     console.log(`listening on port ${PORT}`);
     app.listen(PORT);
   });
+
