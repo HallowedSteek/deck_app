@@ -39,6 +39,20 @@ app.post("/decks", async (req: Request, res: Response) => {
   res.json(createdDeck);
 });
 
+//endpoint pt stergere 🔽
+app.delete("/decks/:deckId", async (req: Request, res: Response) => {
+
+  //ia id-ul din url
+  const deckId = await req.params.deckId;
+
+  //sterge item ul
+  const deck = await Deck.findByIdAndDelete(deckId);
+
+  //trimitem mesaj ca a fost sters cu succes
+  res.json(deck);
+  console.log("succes");
+});
+
 mongoose.connect(process.env.MONGO_URL!).then(() => {
   console.log(`listening on port ${PORT}`);
   app.listen(PORT);
