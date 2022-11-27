@@ -4,15 +4,16 @@ import { Formik, Field, Form, FormikHelpers } from 'formik';
 
 
 interface Values {
-    _id?: string;
+    _id: string;
     title: string;
+    __v: number;
 }
 
 
 
 const DeckForm: React.FC = () => {
 
-    const [decks, setDecks] = useState([]);
+    const [decks, setDecks] = useState<Values[]>([]);
 
 
     useEffect(() => {
@@ -44,7 +45,9 @@ const DeckForm: React.FC = () => {
 
             <Formik
                 initialValues={{
+                    _id:'',
                     title: '',
+                    __v: 0,
                 }}
                 onSubmit={async (
                     values: Values,
