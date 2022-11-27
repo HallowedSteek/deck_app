@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 
 import { Formik, Field, Form, FormikHelpers } from 'formik';
 
-
 interface Values {
     _id: string;
     title: string;
@@ -15,20 +14,21 @@ const DeckForm: React.FC = () => {
 
     const [decks, setDecks] = useState<Values[]>([]);
 
+    async function handleClose(dekcId: string) {
+        await fetch(`http://localhost:5000/decks/${dekcId}`, { method: "DELETE" });
+        setDecks(decks.filter((deck: Values) => deck._id !== dekcId));
+
+    }
 
     useEffect(() => {
         async function fetchDecks() {
             const response = await fetch("http://localhost:5000/decks");
             const newDecks = await response.json();
             setDecks(newDecks);
-
         }
+
         fetchDecks();
-    }, [decks])
-
-    console.log(decks)
-
-
+    }, [])
 
     return (
 
@@ -36,16 +36,18 @@ const DeckForm: React.FC = () => {
             <ul className='deck--grid'>
                 {
                     decks.map((item: Values) => (
-                        <li className='deck--grid--item' key={item._id}>{item.title.toUpperCase()}</li>
+                        <li className='deck--grid--item' key={item._id}>{item.title.toUpperCase()}
+                            <button onClick={() => handleClose(item._id)} className='close'></button>
+                        </li>
+
                     ))
                 }
             </ul>
 
 
-
             <Formik
                 initialValues={{
-                    _id:'',
+                    _id: '',
                     title: '',
                     __v: 0,
                 }}
@@ -54,19 +56,21 @@ const DeckForm: React.FC = () => {
                     actions: FormikHelpers<Values>,
                 ) => {
 
-                    await fetch("http://localhost:5000/decks", {
+                    const response = await fetch("http://localhost:5000/decks", {
                         method: "POST",
-
                         //🔽 specificam tipul valorilor trimise
                         headers: {
                             "Content-Type": "application/json",
                         },
-
                         //🔽 valorile trimise
                         body: JSON.stringify(
                             values,
                         ),
-                    });
+                    })
+
+                    const deck = await response.json();
+
+                    setDecks([...decks, deck]);
 
                     actions.resetForm();
                     actions.setSubmitting(false);
