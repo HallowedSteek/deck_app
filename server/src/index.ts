@@ -8,6 +8,9 @@ import mongoose from "mongoose"; //create models for our posts
 import cors from "cors"; // cross origin requests
 
 import Deck from "./models/Deck";
+import createDeck from "./controller/createDeck";
+import deleteDeck from "./controller/deleteDeck";
+import getDecks from "./controller/getDecks";
 
 const PORT: number = 5000;
 
@@ -20,40 +23,13 @@ app.use(express.json());
 
 //endpoint pt get 🔽
 
-app.get("/decks", async (req: Request, res: Response) => {
-  //cum dam fetch la deck urile din mongo?
-
-  const decks = await Deck.find();
-
-  //cum trimitem inapoi ce am primit
-
-  res.json(decks);
-});
+app.get("/decks", getDecks);
 
 //un endpoint pt post deck 🔽
-app.post("/decks", async (req: Request, res: Response) => {
-  const newDeck = new Deck({
-    title: req.body.title,
-  });
-  const createdDeck = await newDeck.save(); //dupa ce creezi un obiect nou trebuie sa il si salvezi
-  res.json(createdDeck);
-});
+app.post("/decks", createDeck);
 
 //endpoint pt stergere 🔽
-app.delete("/decks/:deckId", async (req: Request, res: Response) => {
-
-  //ia id-ul din url
-  const deckId = await req.params.deckId;
-
-  //sterge item ul
-  const deck = await Deck.findByIdAndDelete(deckId);
-
-  //trimitem mesaj ca a fost sters cu succes
-  res.json(deck);
-  console.log("succes");
-});
-
-
+app.delete("/decks/:deckId", deleteDeck);
 
 mongoose.connect(process.env.MONGO_URL!).then(() => {
   console.log(`listening on port ${PORT}`);
