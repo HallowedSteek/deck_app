@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import addDeck from '../api/addDeck';
 import deleteDeck from '../api/deleteDeck';
 import getDecks from '../api/getDecks';
-import { Values } from '../api/customTypes';
+import { Values } from '../api/config';
 
 
 

@@ -1,7 +1,7 @@
-import { Values } from "./customTypes";
+import { API_URL, Values } from "./config";
 
 async function addDeck(values: Values) {
-  const response = await fetch("http://localhost:5000/decks", {
+  const response = await fetch(`${API_URL}`, {
     method: "POST",
     //🔽 specificam tipul valorilor trimise
     headers: {

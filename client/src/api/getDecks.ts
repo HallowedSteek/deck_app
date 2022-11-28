@@ -1,8 +1,8 @@
-import { Values } from "./customTypes";
+import { API_URL, Values } from "./config";
 
 
 async function getDecks():Promise<Values[]> {
-  const response = await fetch("http://localhost:5000/decks");
+  const response = await fetch(`${API_URL}`);
   return response.json();
 }
 
