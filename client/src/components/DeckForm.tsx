@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 
 import { Formik, Field, Form, FormikHelpers } from 'formik';
 
+import {Link} from 'react-router-dom'
+
+
 interface Values {
     _id: string;
     title: string;
@@ -10,11 +13,12 @@ interface Values {
 
 
 
+
 const DeckForm: React.FC = () => {
 
     const [decks, setDecks] = useState<Values[]>([]);
 
-    async function handleClose(dekcId: string) {
+    async function handleDelete(dekcId: string) {
         await fetch(`http://localhost:5000/decks/${dekcId}`, { method: "DELETE" });
         setDecks(decks.filter((deck: Values) => deck._id !== dekcId));
 
@@ -36,10 +40,10 @@ const DeckForm: React.FC = () => {
             <ul className='deck--grid'>
                 {
                     decks.map((item: Values) => (
-                        <li className='deck--grid--item' key={item._id}>{item.title.toUpperCase()}
-                            <button onClick={() => handleClose(item._id)} className='close'></button>
+                        <li className='deck--grid--item' key={item._id}>
+                           <Link to={`/decks/${item._id}`} className="link">{item.title.toUpperCase()}</Link> 
+                            <button onClick={() => handleDelete(item._id)} className='close'></button>
                         </li>
-
                     ))
                 }
             </ul>
@@ -51,11 +55,7 @@ const DeckForm: React.FC = () => {
                     title: '',
                     __v: 0,
                 }}
-                onSubmit={async (
-                    values: Values,
-                    actions: FormikHelpers<Values>,
-                ) => {
-
+                onSubmit={async (values: Values, actions: FormikHelpers<Values>) => {
                     const response = await fetch("http://localhost:5000/decks", {
                         method: "POST",
                         //🔽 specificam tipul valorilor trimise

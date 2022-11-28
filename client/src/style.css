@@ -23,6 +23,11 @@
   z-index: 10;
 }
 
+.link{
+  text-decoration: none;
+  color: black;
+}
+
 body {
   margin: 0;
   padding: 0;
