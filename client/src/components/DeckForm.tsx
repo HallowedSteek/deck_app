@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react'
 
 import { Formik, Field, Form, FormikHelpers } from 'formik';
 
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-
-interface Values {
-    _id: string;
-    title: string;
-    __v: number;
-}
+import addDeck from '../api/addDeck';
+import deleteDeck from '../api/deleteDeck';
+import getDecks from '../api/getDecks';
+import { Values } from '../api/customTypes';
 
 
 
@@ -18,19 +16,15 @@ const DeckForm: React.FC = () => {
 
     const [decks, setDecks] = useState<Values[]>([]);
 
-    async function handleDelete(dekcId: string) {
-        await fetch(`http://localhost:5000/decks/${dekcId}`, { method: "DELETE" });
-        setDecks(decks.filter((deck: Values) => deck._id !== dekcId));
-
+    async function handleDelete(deckId: string) {
+        await deleteDeck(deckId)
+        setDecks(decks.filter((deck: Values) => deck._id !== deckId));
     }
 
     useEffect(() => {
         async function fetchDecks() {
-            const response = await fetch("http://localhost:5000/decks");
-            const newDecks = await response.json();
-            setDecks(newDecks);
+            setDecks(await getDecks());
         }
-
         fetchDecks();
     }, [])
 
@@ -41,7 +35,7 @@ const DeckForm: React.FC = () => {
                 {
                     decks.map((item: Values) => (
                         <li className='deck--grid--item' key={item._id}>
-                           <Link to={`/decks/${item._id}`} className="link">{item.title.toUpperCase()}</Link> 
+                            <Link to={`/decks/${item._id}`} className="link">{item.title.toUpperCase()}</Link>
                             <button onClick={() => handleDelete(item._id)} className='close'></button>
                         </li>
                     ))
@@ -56,19 +50,9 @@ const DeckForm: React.FC = () => {
                     __v: 0,
                 }}
                 onSubmit={async (values: Values, actions: FormikHelpers<Values>) => {
-                    const response = await fetch("http://localhost:5000/decks", {
-                        method: "POST",
-                        //🔽 specificam tipul valorilor trimise
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        //🔽 valorile trimise
-                        body: JSON.stringify(
-                            values,
-                        ),
-                    })
 
-                    const deck = await response.json();
+
+                    const deck = await addDeck(values);;
 
                     setDecks([...decks, deck]);
 
