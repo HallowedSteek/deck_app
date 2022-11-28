@@ -11,6 +11,7 @@ import Deck from "./models/Deck";
 import createDeck from "./controller/createDeck";
 import deleteDeck from "./controller/deleteDeck";
 import getDecks from "./controller/getDecks";
+import cardForDeck from "./controller/cardsForDeck";
 
 const PORT: number = 5000;
 
@@ -27,6 +28,8 @@ app.get("/decks", getDecks);
 
 //un endpoint pt post deck 🔽
 app.post("/decks", createDeck);
+app.post("/decks/:deckId/card", cardForDeck)
+
 
 //endpoint pt stergere 🔽
 app.delete("/decks/:deckId", deleteDeck);
