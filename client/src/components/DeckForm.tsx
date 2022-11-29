@@ -31,11 +31,14 @@ const DeckForm: React.FC = () => {
     return (
 
         <div className="home">
+
+            <h1 className='main-title'>YOUR DECKS</h1>
+
             <ul className='deck--grid'>
                 {
                     decks.map((item: Values) => (
                         <li className='deck--grid--item' key={item._id}>
-                            <Link to={`/decks/${item._id}`} className="link">{item.title.toUpperCase()}</Link>
+                            <Link to={`/decks/${item._id}`} className="link  title">{item.title.toUpperCase()}</Link>
                             <button onClick={() => handleDelete(item._id)} className='close'></button>
                         </li>
                     ))
@@ -67,7 +70,6 @@ const DeckForm: React.FC = () => {
                 <Form className='deck--form'>
                     <label htmlFor="title" className='deck--form--title-label'>Deck title</label>
                     <Field id="title" className="deck--form--title--input" name="title" placeholder="My awesome deck" />
-
                     <button className='deck--form--submit' type="submit">Create Deck</button>
                 </Form>
 

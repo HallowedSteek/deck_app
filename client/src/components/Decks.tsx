@@ -2,16 +2,13 @@ import React, { useEffect, useState } from 'react'
 
 import { Formik, Field, Form, FormikHelpers } from 'formik';
 
-import {useParams } from 'react-router-dom'
-
-// import addDeck from '../api/addDeck';
-// import deleteDeck from '../api/deleteDeck';
-// import getDecks from '../api/getDecks';
+import { useParams } from 'react-router-dom'
 
 import { Values } from '../api/config';
 
 import createCard from '../api/createCard';
 import getDeck from '../api/getDeck';
+import deleteCard from '../api/deleteCard';
 
 
 
@@ -25,17 +22,18 @@ const Decks: React.FC = () => {
 
 
     console.log(cards)
-    // async function handleDelete(deckId: string) {
-    //     await deleteDeck(deckId)
-    //     setDecks(decks.filter((deck: Values) => deck._id !== deckId));
-    // }
+
+    async function handleDeleteCard(index: string) {
+        if(!deckId) return
+        const somn = await deleteCard(deckId, index);
+        setCards(somn.cards);
+    }
 
     useEffect(() => {
         async function fetchDeck() {
             if (!deckId) return
             const newDeck = await getDeck(deckId)
             setDeck(newDeck);
-            console.log(newDeck.cards)
             setCards(newDeck.cards);
         }
         fetchDeck();
@@ -44,13 +42,15 @@ const Decks: React.FC = () => {
     return (
 
         <div className="home">
-            
+
+            <div className="main-title">{deck?.title.toUpperCase()}</div>
+
             <ul className='deck--grid'>
                 {
-                    cards.map((item) => (
-                        <li className='deck--grid--item' key={item}>
-                            {item}
-                            {/* <button onClick={() => handleDelete(item._id)} className='close'></button> */}
+                    cards.map((item, index: number) => (
+                        <li className='deck--grid--item' key={index}>
+                            <p>{item}</p> 
+                            <button onClick={() => handleDeleteCard(index.toString())} className='close'></button>
                         </li>
                     ))
                 }
@@ -81,10 +81,10 @@ const Decks: React.FC = () => {
             >
 
                 <Form className='deck--form'>
-                    <label htmlFor="text" className='deck--form--text-label'>Decks text</label>
-                    <Field id="text" className="deck--form--text--input" name="text" placeholder="My awesome deck" />
+                    <label htmlFor="text" className='deck--form--title-label'>Card text</label>
+                    <Field id="text" className="deck--form--text--input" name="text" placeholder="My awesome card" />
 
-                    <button className='deck--form--submit' type="submit">Create Decks</button>
+                    <button className='deck--form--submit' type="submit">Create Card</button>
                 </Form>
 
             </Formik>

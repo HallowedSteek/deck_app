@@ -51,17 +51,35 @@ body {
   gap: 10px;
 }
 
+.deck--grid--item p {
+  overflow-wrap:break-word;
+  line-height:normal;
+}
+
+
+.title{
+  line-height: 20vh;
+}
+
+.main-title{
+  text-align: center;
+  padding-bottom: 10vh;
+  font-family: "Anek Devanagari", sans-serif;
+  font-weight: 700;
+  color: var(--white);
+  font-size: 100px;
+}
+
 .deck--grid--item {
   position: relative;
   background-color: var(--white);
   width: 20vw;
-  line-height: 20vh;
+  min-height: 20vh;
   text-align: center;
   border: 2px solid black;
   border-radius: 10px;
-
   font-family: "Anek Devanagari", sans-serif;
-  font-weight: 600;
+  font-weight: 400;
   font-size: xx-large;
 
   transition: all 0.2s ease-in-out;
@@ -77,6 +95,7 @@ body {
 }
 
 .deck--form {
+  min-width: 60vw;
   display: grid;
   grid-template-columns: 0.5fr 1fr;
 }
