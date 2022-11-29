@@ -47,6 +47,8 @@ const DeckForm: React.FC = () => {
                 initialValues={{
                     _id: '',
                     title: '',
+                    text: '',
+                    cards: [''],
                     __v: 0,
                 }}
                 onSubmit={async (values: Values, actions: FormikHelpers<Values>) => {

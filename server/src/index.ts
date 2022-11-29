@@ -28,7 +28,7 @@ app.get("/decks", getDecks);
 
 //un endpoint pt post deck 🔽
 app.post("/decks", createDeck);
-app.post("/decks/:deckId/card", cardForDeck)
+app.post("/decks/:deckId/cards", cardForDeck)
 
 
 //endpoint pt stergere 🔽

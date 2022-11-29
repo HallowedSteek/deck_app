@@ -4,6 +4,7 @@ import DeckForm from './components/DeckForm';
 import './style.css';
 
 import { createBrowserRouter, RouterProvider} from "react-router-dom";
+import Decks from './components/Decks';
 
 
 
@@ -16,7 +17,7 @@ function App() {
     },
     {
       path: "/decks/:deckId",
-      element: <div>JDSAKLJLKASJDLASJL</div>,
+      element: <Decks/>,
     },
   ]);
 
