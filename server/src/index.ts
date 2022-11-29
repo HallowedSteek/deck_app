@@ -12,6 +12,8 @@ import createDeck from "./controller/createDeck";
 import deleteDeck from "./controller/deleteDeck";
 import getDecks from "./controller/getDecks";
 import cardForDeck from "./controller/cardsForDeck";
+import deleteCard from "./controller/deleteCard";
+import getCards from "./controller/getCards";
 
 const PORT: number = 5000;
 
@@ -25,16 +27,21 @@ app.use(express.json());
 //endpoint pt get 🔽
 
 app.get("/decks", getDecks);
+app.get("/decks/:deckId/cards", getCards);
 
 //un endpoint pt post deck 🔽
 app.post("/decks", createDeck);
-app.post("/decks/:deckId/cards", cardForDeck)
 
+//un endpoint pt adaugat carduri 🔽
+app.post("/decks/:deckId/cards", cardForDeck);
 
 //endpoint pt stergere 🔽
 app.delete("/decks/:deckId", deleteDeck);
+app.delete("/decks/:deckId/cards", deleteCard);
 
 mongoose.connect(process.env.MONGO_URL!).then(() => {
   console.log(`listening on port ${PORT}`);
   app.listen(PORT);
 });
+
+

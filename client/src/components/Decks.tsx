@@ -11,12 +11,14 @@ import { Link, useParams } from 'react-router-dom'
 import { Values } from '../api/config';
 
 import createCard from '../api/createCard';
+import getDeck from '../api/getDeck';
 
 
 
 
 const Decks: React.FC = () => {
 
+    const [deck, setDeck] = useState<Values | undefined>()
     const [cards, setCards] = useState<string[]>([]);
 
     const { deckId } = useParams();
@@ -28,16 +30,21 @@ const Decks: React.FC = () => {
     //     setDecks(decks.filter((deck: Values) => deck._id !== deckId));
     // }
 
-    // useEffect(() => {
-    //     async function fetchDecks() {
-    //         setDecks(await getDecks());
-    //     }
-    //     fetchDecks();
-    // }, [])
+    useEffect(() => {
+        async function fetchDeck() {
+            if (!deckId) return
+            const newDeck = await getDeck(deckId)
+            setDeck(newDeck);
+            console.log(newDeck.cards)
+            setCards(newDeck.cards);
+        }
+        fetchDeck();
+    }, [deckId])
 
     return (
 
         <div className="home">
+            
             <ul className='deck--grid'>
                 {
                     cards.map((item) => (
@@ -62,10 +69,10 @@ const Decks: React.FC = () => {
 
 
 
-                    const {cards: serverCards } = await createCard(values, deckId!);
+                    const { cards: serverCards } = await createCard(values, deckId!);
 
                     setCards(serverCards);
-                
+
 
                     actions.resetForm();
                     actions.setSubmitting(false);
