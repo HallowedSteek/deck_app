@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { Formik, Field, Form, FormikHelpers } from 'formik';
 
-import { Link, useParams } from 'react-router-dom'
+import {useParams } from 'react-router-dom'
 
 // import addDeck from '../api/addDeck';
 // import deleteDeck from '../api/deleteDeck';

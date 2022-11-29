@@ -37,7 +37,7 @@ app.post("/decks/:deckId/cards", cardForDeck);
 
 //endpoint pt stergere 🔽
 app.delete("/decks/:deckId", deleteDeck);
-app.delete("/decks/:deckId/cards", deleteCard);
+app.delete("/decks/:deckId/cards/:index", deleteCard);
 
 mongoose.connect(process.env.MONGO_URL!).then(() => {
   console.log(`listening on port ${PORT}`);
