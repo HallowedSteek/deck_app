@@ -2,8 +2,7 @@ import * as dotenv from "dotenv";
 
 dotenv.config();
 
-import bodyParser from "body-parser"; //send post req
-import express, { Request, Response } from "express"; //framework for creating the routing for our app
+import express from "express"; //framework for creating the routing for our app
 import mongoose from "mongoose"; //create models for our posts
 import cors from "cors"; // cross origin requests
 
