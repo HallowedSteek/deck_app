@@ -14,7 +14,7 @@ import cardForDeck from "./controller/cardsForDeck";
 import deleteCard from "./controller/deleteCard";
 import getCards from "./controller/getCards";
 
-const PORT: number = 5000;
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 
