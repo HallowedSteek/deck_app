@@ -21,7 +21,6 @@ const Decks: React.FC = () => {
     const { deckId } = useParams();
 
 
-    console.log(cards)
 
     async function handleDeleteCard(index: string) {
         if(!deckId) return
@@ -36,7 +35,13 @@ const Decks: React.FC = () => {
             setDeck(newDeck);
             setCards(newDeck.cards);
         }
-        fetchDeck();
+        
+        try {
+            fetchDeck();    
+        } catch (error) {
+            alert("Something went wrong while fetching... " + error);
+        }
+        
     }, [deckId])
 
     return (
