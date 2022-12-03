@@ -38,7 +38,7 @@ const DeckForm: React.FC = () => {
                 {
                     decks.map((item: Values) => (
                         <li className='deck--grid--item' key={item._id}>
-                            <Link to={`/decks/${item._id}`} className="link  title">{item.title.toUpperCase()}</Link>
+                            <Link to={`/deck_app/decks/${item._id}`} className="link  title">{item.title.toUpperCase()}</Link>
                             <button onClick={() => handleDelete(item._id)} className='close'></button>
                         </li>
                     ))
