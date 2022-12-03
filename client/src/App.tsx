@@ -12,11 +12,11 @@ function App() {
 
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "/deck_app",
       element: <DeckForm />,
     },
     {
-      path: "/decks/:deckId",
+      path: "/deck_app/decks/:deckId",
       element: <Decks/>,
     },
   ]);

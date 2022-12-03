@@ -36,11 +36,7 @@ const Decks: React.FC = () => {
             setCards(newDeck.cards);
         }
         
-        try {
-            fetchDeck();    
-        } catch (error) {
-            alert("Something went wrong while fetching... " + error);
-        }
+       fetchDeck();
         
     }, [deckId])
 
