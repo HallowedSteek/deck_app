@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/deck_app/static/css/main.d7cf42a8.css",
-    "main.js": "/deck_app/static/js/main.c47b50cc.js",
+    "main.js": "/deck_app/static/js/main.e6aa1490.js",
     "index.html": "/deck_app/index.html",
     "main.d7cf42a8.css.map": "/deck_app/static/css/main.d7cf42a8.css.map",
-    "main.c47b50cc.js.map": "/deck_app/static/js/main.c47b50cc.js.map"
+    "main.e6aa1490.js.map": "/deck_app/static/js/main.e6aa1490.js.map"
   },
   "entrypoints": [
     "static/css/main.d7cf42a8.css",
-    "static/js/main.c47b50cc.js"
+    "static/js/main.e6aa1490.js"
   ]
 }
